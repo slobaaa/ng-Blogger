@@ -1,0 +1,79 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top" >
+  <div class="container">
+      <a href="#" class="navbar-brand">Blogger.com</a>
+      <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav ml-auto">
+              <ng-template [ngIf]="authService.authenticated()">
+                  <li class="nav-item" role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                      <a routerLink="/" class="nav-link">Home</a>
+                  </li>
+                  <li class="nav-item" role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                    <a routerLink="/bloggers" class="nav-link">Bloggers</a>
+                    </li>
+                  <li class="nav-item" role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                      <a routerLink="/posts" class="nav-link">Posts</a>
+                  </li>
+                  <li class="nav-item" role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                      <a class="nav-link" (click)="signOut()">SignOut</a>
+                  </li>
+              </ng-template>
+              <ng-template [ngIf]="!authService.authenticated()">
+                  <li class="nav-item" role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                      <a routerLink="/signin" class="nav-link">SignIn</a>
+                  </li>
+                  <li class="nav-item" role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                      <a routerLink="/signup" class="nav-link">SignUp</a>
+                  </li>
+              </ng-template>
+          </ul>
+      </div>
+  </div>
+</nav>
+
+
+<router-outlet></router-outlet>
+<!-- <ng-template [ngIf]="!authService.authenticated()">
+        <div class="container">
+                <div class="row">
+                  <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                    <div class="card card-signin my-5">
+                      <div class="card-body">
+                        <h5 class="card-title text-center">Sign In</h5>
+                        <form (ngSubmit)="signin(f)" #f="ngForm">
+                          <div class="form-label-group">
+                              <input type="email" placeholder="Email" id="email" name="email" ngModel class="form-control form-control-lg" autofocus>
+                            <label for="inputEmail">Email address</label>
+                          </div>
+            
+                          <div class="form-label-group">
+                              <input type="password" placeholder="Password" id="password" name="password" ngModel class="form-control form-control-lg">
+                            <label for="inputPassword">Password</label>
+                          </div>
+            
+                          <div class="custom-control custom-checkbox mb-3">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1">
+                            <label class="custom-control-label" for="customCheck1">Remember password</label>
+                          </div>
+                          <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+</ng-template> -->
+<footer id="main-footer" class="bg-dark">
+  <div class="container">
+      <div class="row">
+          <div class="col text-center text-white">
+              <div class="py-5">
+                  <h1 class="h3">Blogger.com</h1>
+                  <p>Copyright &copy; 2018 Slobodan Vujcin</p>
+              </div>
+          </div>
+      </div>
+  </div>
+</footer>

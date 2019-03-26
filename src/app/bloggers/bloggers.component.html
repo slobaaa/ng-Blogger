@@ -1,0 +1,146 @@
+<!-- SEARCH -->
+<div class="container mt-5 pt-5">
+  <div class="form-group">
+    <label for="usr">Search:</label>
+    <input type="text" class="form-control" id="usr" [(ngModel)]="query">
+  </div>
+</div>
+<!-- END SEARCH -->
+
+
+<div class="col-md-4 my-5"  *ngFor="let blogger of bloggers | filter: 'name,email, about':query; let i=index;">
+  <div class="card m-3">
+      <div class="card-header">
+        <h3>{{blogger.name}}</h3>
+      </div>
+      <div class="card-body">
+        <h5 class="text-muted">{{blogger.email}}</h5>
+        <p>{{blogger.about}}</p>
+        <div class="d-flex flex-row justify-content-center">
+          <div class="p-4">
+            <a href="https://www.facebook.com/">
+            <i class="fa fa-facebook"></i>
+          </a>
+          </div>
+          <div class="p-4">
+              <a href="https://www.twitter.com/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </div>
+            <div class="p-4">
+                <a href="https://www.instagram.com/">
+                <i class="fa fa-instagram"></i>
+              </a>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-md-6">
+            <button class="btn-block btn btn-warning" data-toggle="modal" data-target="#changeBlogger" (click)="getUpdateData(blogger.id, blogger.name, blogger.about, blogger.email)">Change</button>
+          </div>
+          <div class="col-md-6">
+            <button class="btn-block btn btn-danger" (click)="deleteBlogger(blogger.id)">Delete</button>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+<div class="container my-4">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="info-header mb-5 text-center">
+        <h1 class="text-primary pb-3">
+          Add New Blogger
+        </h1>
+        <div class="container">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">
+              Add new blogger
+            </button>
+            <div class="modal" id="addModal" #add>
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Add new blogger</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="modal-body">
+                    <form name="form" (ngSubmit)="f.form.valid && submit(name.value, about.value, email.value)" #f="ngForm" novalidate>
+                        <div class="form-group">
+                          <label for="name">Name</label>
+                          <input type="text" class="form-control" [(ngModel)]="model.name" #name="ngModel" [ngClass]="{'is-invalid':f.submitted && name.invalid}" name="name" required />
+                          <div class="invalid-feedback">
+                            <div>Name je obavezno</div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">About</label>
+                            <input type="text" class="form-control" [(ngModel)]="model.about" #about="ngModel" [ngClass]="{'is-invalid':f.submitted && about.invalid}" name="about" required />
+                            <div class="invalid-feedback">
+                              <div>About je obavezno</div>
+                            </div>
+                          </div>
+                        <div class="form-group">
+                          <label for="email">Email</label>
+                          <input type="text" class="form-control" [(ngModel)]="model.email" #email="ngModel" [ngClass]="{'is-invalid':f.submitted && email.invalid}" name="email" required email />
+                          <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+                            <div *ngIf="email.errors.required">Email Name is required</div>
+                            <div *ngIf="email.errors.email">Email must be a valid email Address</div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <button class="btn btn-primary"[disabled]="f.invalid">Add blogger</button>
+                        </div>
+                      </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+ </div>
+
+  <!-- modal change -->
+<div class="container">
+    <div class="modal" id="changeBlogger">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Change blogger</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+             <form name="form" (ngSubmit)="fc.form.valid && changeBlogger(nameChange.value, aboutChange.value, emailChange.value)" #fc="ngForm" novalidate> <!--novalidate znaci da ne moze da se submituje ako nije validna-->
+                <div class="form-group">
+                  <label for="nameChange">Name</label>
+                  <input type="text" class="form-control" [(ngModel)]="model.nameChange" #nameChange="ngModel" [ngClass]="{'is-invalid':f.submitted && nameChange.invalid}" name="nameChange" autofocus required />
+                  <div class="invalid-feedback">
+                    <div>Name je obavezno</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                    <label for="aboutChange">About</label>
+                    <input type="text" class="form-control" [(ngModel)]="model.aboutChange" #aboutChange="ngModel" [ngClass]="{'is-invalid':f.submitted && aboutChange.invalid}" name="aboutChange" required />
+                    <div class="invalid-feedback">
+                      <div>About je obavezno</div>
+                    </div>
+                  </div>
+                <div class="form-group">
+                  <label for="emailChange">Email</label>
+                  <input type="text" class="form-control" [(ngModel)]="model.emailChange" #emailChange="ngModel" [ngClass]="{'is-invalid':f.submitted && emailChange.invalid}" name="emailChange" required email />
+                  <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+                    <div *ngIf="email.errors.required">Email Name is required</div>
+                    <div *ngIf="email.errors.email">Email must be a valid email Address</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-primary" [disabled]="fc.invalid">Change blogger</button>
+                </div>
+              </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

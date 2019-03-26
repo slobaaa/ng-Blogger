@@ -1,0 +1,69 @@
+<!-- <header id="home-section">
+    <div class="dark-overlay">
+      <div class="container home-inner">
+        <div class="row">
+          <div class="col-md-8 d-none d-md-block text-light">
+            <h1 class="display-4">
+              <strong>Sign Up</strong>
+            </h1>
+            <p>Etiam risus felis, porttitor eu augue eu, vulputate sodales libero. Nunc a
+              t ornare nisl. Fusce finibus vulputate porttitor. Cras ornare feugiat di
+              am ac tincidunt. Quisque luctus nulla in lectus placerat convallis. Pellent
+              esque a blandit ante. Nullam elementum ullamcorper fermentum. Lorem ipsum d
+              olor sit amet, consectetur adipiscing elit. Maecenas at blandit tortor. Do
+              nec magna erat, venenatis quis arcu in, vestibulum varius lorem. Ali
+              quam sed ipsum nec nibh suscipit sodales. Sed sit amet feugiat nulla, nec lacinia d
+              iam. Nunc vitae feugiat sapien, id eleifend arcu. Integer fermentum quam sed odio semper pretium. Mauris vel faucibus eros. 
+            </p>
+          </div>
+          <div class="col-md-4">
+            <div class="card bg-warning text-center card-form">
+              <div class="card-body">
+                <form (ngSubmit)="signup(f)" #f="ngForm">
+                  <div class="form-group">
+                    <input type="text" placeholder="Username" id="name" name="name" ngModel class="form-control form-control-lg">
+                  </div>
+                  <div class="form-group">
+                    <input type="email" placeholder="Email" id="email" name="email" ngModel class="form-control form-control-lg">
+                  </div>
+                  <div class="form-group">
+                    <input type="password" placeholder="Password" id="password" name="password" ngModel class="form-control form-control-lg">
+                  </div>
+                  <button class="btn btn-outline-light btn-block" type="submit">Sign Up</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header> -->
+  
+  <div class="container">
+      <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+          <div class="card card-signin my-5">
+            <div class="card-body">
+              <h5 class="card-title text-center">Sign Up</h5>
+              <form (ngSubmit)="signup(f)" #f="ngForm">
+                <div class="form-label-group">
+                    <input type="email" placeholder="Email" id="email" name="email" ngModel class="form-control form-control-lg" autofocus>
+                  <label for="inputEmail">Email address</label>
+                </div>
+  
+                <div class="form-label-group">
+                    <input type="password" placeholder="Password" id="password" name="password" ngModel class="form-control form-control-lg">
+                  <label for="inputPassword">Password</label>
+                </div>
+  
+                <div class="custom-control custom-checkbox mb-3">
+                  <input type="checkbox" class="custom-control-input" id="customCheck1">
+                  <label class="custom-control-label" for="customCheck1">Remember password</label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign up</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

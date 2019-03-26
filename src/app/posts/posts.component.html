@@ -1,0 +1,181 @@
+<div class="bg-light">
+  <div class="container my-5">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-3">
+          <div class="card-header">
+            <h4>Posts</h4>
+          </div>
+          <table class="table table-hover table-bordered text-center">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Action</th>
+                <th>Blogger added</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let post of posts | filter: 'title,bloggerPosted':query; let i=index;">
+                <td>{{i+1}}</td>
+                <td (click)="getUpdateData(post.id, post.title, post.category, post.datePosted, post.bloggerPosted)" data-toggle="modal" data-target="#viewModal">{{ post.title }}</td>
+                <td>
+                  <button class="btn btn-danger" (click)="deletePost(post.id)">Delete Post</button>&nbsp;
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changeModal" (click)="getUpdateData(post.id, post.title, post.category, post.datePosted, post.bloggerPosted)">Change</button>
+                  <!-- <button class="btn btn-warning" (click)="changePost(post.id)">Change Post</button> -->
+                </td>
+                <td>{{post.bloggerPosted}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SEARCH -->
+<div class="container">
+  <div class="form-group">
+    <label for="usr">Search:</label>
+    <input type="text" class="form-control" id="usr" [(ngModel)]="query">
+  </div>
+</div>
+<!-- END SEARCH -->
+
+<!-- modal Add -->
+<div id="modalAdd" class="container my-4">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="info-header mb-5 text-center">
+        <h1 class="text-primary pb-3">
+          Add New Post
+        </h1>
+        <div class="container">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">
+              Add new post
+            </button>
+            <div class="modal" id="addModal">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Add new post</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="modal-body">
+              <form name="formAdd" (ngSubmit)="f.form.valid && submit(title.value, category.value, postDate.value, bloggerPosted.value)" #f="ngForm" novalidate>
+                <div class="form-group">
+                  <label for="title">Title</label>
+                  <input type="text" class="form-control" [(ngModel)]="model.title" #title="ngModel" [ngClass]="{'is-invalid':f.submitted && title.invalid}" name="title" required />
+                  <div class="invalid-feedback">
+                      <div>Title je obavezno</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="category">Category</label>
+                  <input type="text" class="form-control" [(ngModel)]="model.category" #category="ngModel" [ngClass]="{'is-invalid':f.submitted && category.invalid}" name="category" required />
+                  <div class="invalid-feedback">
+                      <div>Category je obavezno</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="postDate">Post date</label>
+                  <input type="text" class="form-control" [(ngModel)]="model.postDate" #postDate="ngModel" [ngClass]="{'is-invalid':f.submitted && postDate.invalid}" name="postDate" required />
+                  <div class="invalid-feedback">
+                      <div>Post date je obavezno</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                <label for="bloggerAdded">Blogger added:</label>
+                  <select name="bloggerAdded" class="form-control" #bloggerPosted>
+                    <option *ngFor="let blogger of bloggers; let j=index" [value]="blogger.name">{{blogger.name}}</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Add post</button>&nbsp;
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+ </div>
+
+ <!-- modal change -->
+<div class="container">
+    <div class="modal" id="changeModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Change post</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+              <form name="formChange" (ngSubmit)="fc.form.valid && changePost(titleChange.value, categoryChange.value, postDateChange.value, postBloggerPosted.value)" #fc="ngForm" novalidate>
+                <div class="form-group">
+                  <label for="titleChange">Title</label>
+                  <input type="text" class="form-control" [(ngModel)]="model.titleChange" #titleChange="ngModel" [ngClass]="{'is-invalid':fc.submitted && titleChange.invalid}" name="titleChange" required />
+                  <div class="invalid-feedback">
+                      <div>Title je obavezno</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="categoryChange">Category</label>
+                  <input type="text" class="form-control" [(ngModel)]="model.categoryChange" #categoryChange="ngModel" [ngClass]="{'is-invalid':fc.submitted && categoryChange.invalid}" name="categoryChange" required />
+                  <div class="invalid-feedback">
+                      <div>Category je obavezno</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="postDateChange">Post date</label>
+                  <input type="text" class="form-control" [(ngModel)]="model.postDateChange" #postDateChange="ngModel" [ngClass]="{'is-invalid':fc.submitted && postDateChange.invalid}" name="postDateChange" required />
+                  <div class="invalid-feedback">
+                      <div>Post date je obavezno</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                <label for="bloggerAdded">Blogger added:</label>
+                  <select name="bloggerAdded" class="form-control" #postBloggerPosted>
+                    <option *ngFor="let blogger of bloggers; let j=index" [value]="blogger.name">{{blogger.name}}</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Change post</button>&nbsp;
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal view full post -->
+<div class="container">
+  <div class="modal" id="viewModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Post details</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+              <div class="form-group">
+                  <label for="title">Title: <strong>{{getTitle}}</strong></label>
+              </div>
+              <div class="form-group">
+                  <label for="category">Category: <strong>{{getCategory}}</strong></label>
+              </div>
+              <div class="form-group">
+                  <label for="postDate">Post date: <strong>{{getDate}}</strong></label>
+              </div>
+              <div class="form-group">
+                <label for="bloggerPosted">Post date: <strong>{{getBlogger}}</strong></label>
+            </div>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
